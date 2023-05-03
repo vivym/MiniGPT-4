@@ -6,12 +6,20 @@
 """
 
 import webdataset as wds
+from webdataset.shardlists import expand_urls
+from omegaconf.listconfig import ListConfig
 from minigpt4.datasets.datasets.base_dataset import BaseDataset
 
 
 class LaionDataset(BaseDataset):
     def __init__(self, vis_processor, text_processor, location):
         super().__init__(vis_processor=vis_processor, text_processor=text_processor)
+
+        if isinstance(location, (list, ListConfig)):
+            urls = []
+            for loc in location:
+                urls.extend(expand_urls(loc))
+            location = urls
 
         self.inner_dataset = wds.DataPipeline(
             wds.ResampledShards(location),

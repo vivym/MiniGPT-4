@@ -36,8 +36,8 @@ run:
 
   weight_decay: 0.05
   max_epoch: 4
-  batch_size_train: 64
-  batch_size_eval: 64
+  batch_size_train: 32
+  batch_size_eval: 32
   num_workers: 4
   warmup_steps: 5000
   iters_per_epoch: 5000
@@ -48,7 +48,7 @@ run:
   amp: True
   resume_ckpt_path: null
 
-  evaluate: False 
+  evaluate: False
   train_splits: ["train"]
 
   device: "cuda"
